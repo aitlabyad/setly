@@ -158,7 +158,7 @@ export default function cars() {
 
                     {cars.slice(0, 10).map(function (car) {
                         return (
-                            <Car car={car} />
+                            <Car key={car.model} car={car} />
                         )
                     })}
 

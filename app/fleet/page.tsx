@@ -5,7 +5,7 @@ import Sectioncontact from "@/components/sectioncontact";
 import Footer from "@/components/footer";
 import { Poppins } from 'next/font/google';
 import Car from '@/components/car';
-import { cars } from '/constants/acars'
+import { cars } from '../../constants/Acars'
 import { useRouter } from "next/navigation"
 
 
@@ -29,21 +29,7 @@ export default function Home({searchParams}) {
     console.log(searchParams)
         
 
-    const car = {
-        name: "Renault",
-        model: "Express",
-        type: "VAN",
-        year: 2023,
-        doors: 6,
-        seats: 5,
-        transmission: "MANUAL",
-        fuelType: "DIESEL",
-        fuelConsumption: "5.2 L/100 km",
-        price: "4.6",
-        isActive: true,
-        showInMain: false,
-        image: carImgPath + "renault-express-2023.webp",
-    }
+  
 
 
     return (
