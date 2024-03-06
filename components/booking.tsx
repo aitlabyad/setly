@@ -1,9 +1,8 @@
 'use client'
-
 import React from 'react'
 import { useState } from 'react';
-import Example from '@/components/datePicker'
 import { Input, Popover, PopoverHandler, PopoverContent, } from "@material-tailwind/react";
+import type { PopoverContentProps } from "@material-tailwind/react";
 import { format } from "date-fns";
 import { DayPicker } from "react-day-picker";
 import { ChevronRightIcon, ChevronLeftIcon } from "@heroicons/react/24/outline";
@@ -134,9 +133,9 @@ export default function reservation() {
 
   
 
-  const [date, setDate] = useState<Date>();
-  const [date2, setDate2] = useState<Date>();
-  const [place, setplace] = useState();
+  const [date, setDate] = useState<Date>(new Date());
+  const [date2, setDate2] = useState<Date>(new Date());
+  const [place, setPlace] = useState("Morocco");
 
  
 
@@ -165,7 +164,7 @@ export default function reservation() {
           <div className="relative   rounded-xl w-full items-center  justify-center ">
             <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-2 ">
               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 7 7" fill="none">
-                <g clip-path="url(#clip0_162_11101)">
+                <g clipPath="url(#clip0_162_11101)">
                   <path d="M6.76996 6.35432L5.27771 4.86207C5.68436 4.36472 5.8843 3.7301 5.83617 3.08946C5.78803 2.44883 5.49551 1.85121 5.0191 1.4202C4.5427 0.989201 3.91886 0.757796 3.27662 0.773854C2.63438 0.789912 2.02288 1.0522 1.56861 1.50648C1.11434 1.96075 0.852046 2.57225 0.835988 3.21448C0.81993 3.85672 1.05133 4.48056 1.48234 4.95697C1.91334 5.43338 2.51096 5.7259 3.1516 5.77403C3.79223 5.82217 4.42686 5.62223 4.92421 5.21557L6.41646 6.70782C6.46361 6.75336 6.52676 6.77856 6.59231 6.77799C6.65786 6.77742 6.72056 6.75113 6.76691 6.70478C6.81326 6.65843 6.83956 6.59572 6.84013 6.53017C6.8407 6.46462 6.8155 6.40147 6.76996 6.35432ZM3.34321 5.28107C2.94764 5.28107 2.56096 5.16378 2.23207 4.94401C1.90317 4.72425 1.64682 4.41189 1.49545 4.04644C1.34407 3.68099 1.30447 3.27885 1.38164 2.89089C1.45881 2.50293 1.64929 2.14656 1.92899 1.86686C2.2087 1.58715 2.56506 1.39667 2.95303 1.3195C3.34099 1.24233 3.74312 1.28194 4.10857 1.43331C4.47403 1.58469 4.78638 1.84103 5.00615 2.16993C5.22591 2.49883 5.34321 2.88551 5.34321 3.28107C5.34261 3.81132 5.13171 4.31969 4.75676 4.69463C4.38182 5.06957 3.87346 5.28048 3.34321 5.28107Z" fill="#0F0D0E" />
                 </g>
                 <defs>
@@ -175,15 +174,15 @@ export default function reservation() {
                 </defs>
               </svg>
             </div>
-            <select id="countries" onChange={event => setplace(event.target.value)} className="w-full rounded-xl border-0 py-2 pl-10 text-black1 text-sm ring-0 ring-inset bg-white1 ring-transparent placeholder:text-black1  placeholder:text-[12px] focus:ring-0 focus:ring-inset focus:ring-transparent  sm:leading-4">
+            <select id="countries" onChange={(e) => setPlace(e.target.value)} defaultValue={''} className="w-full rounded-xl border-0 py-2 pl-10 text-black1 text-sm ring-0 ring-inset bg-white1 ring-transparent placeholder:text-black1  placeholder:text-[12px] focus:ring-0 focus:ring-inset focus:ring-transparent  sm:leading-4">
 
 
-              <option selected>Pick up location</option>
+              <option >Pick up location</option>
 
               {
                 places.map(plase =>
 
-                  <option value={plase.name}>{plase.name}</option>
+                  <option key={plase.name} value={plase.name}>{plase.name}</option>
 
                 )}
 
@@ -206,16 +205,16 @@ export default function reservation() {
                   <PopoverHandler>
                     <Input
                       className='w-full rounded-xl border-0 py-2 pl-10 text-black1 ring-0 ring-inset bg-white1 ring-transparent placeholder:text-black1  placeholder:text-[12px] focus:ring-0 focus:ring-inset focus:ring-transparent sm:text-sm sm:leading-4'
-                     
+                      onChange={event => setDate(event.target.value)}
                       value={date ? format(date, "MM/dd/yyyy") : ""}
-                      placeholder="Pick up date"
-                    />
+                      placeholder="Pick up date" crossOrigin={undefined}                    />
                   </PopoverHandler>
-                  <PopoverContent >
+                  <PopoverContent placeholder={undefined}
+                  >
                     <DayPicker
 
                       mode="single"
-                      selectedDays={date}
+                      selected={date}
                       onSelect={setDate}
                       showOutsideDays
                       className="border-0"
@@ -272,10 +271,9 @@ export default function reservation() {
                       className='w-full rounded-xl border-0 py-2 pl-10 text-black1 ring-0 ring-inset bg-white1 ring-transparent placeholder:text-black1  placeholder:text-[12px] focus:ring-0 focus:ring-inset focus:ring-transparent sm:text-sm sm:leading-4'
                       onChange={() => null}
                       value={date2 ? format(date2, "MM/dd/yyyy") : ""}
-                      placeholder="return date"
-                    />
+                      placeholder="return date" crossOrigin={undefined}                    />
                   </PopoverHandler>
-                  <PopoverContent >
+                  <PopoverContent placeholder={undefined} >
                     <DayPicker
                       mode="single"
                       selected={date2}

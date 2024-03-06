@@ -68,7 +68,7 @@ export default function Home({searchParams}) {
 
                 {cars.map(function (car) {
                     return (
-                        <Car car={car} place={searchParams.place} date1={searchParams.date} date2={searchParams.date2} />
+                        <Car key={car.model}car={car} place={searchParams.place} date1={searchParams.date} date2={searchParams.date2} />
                     )
                 })}
 
