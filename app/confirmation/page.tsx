@@ -32,52 +32,11 @@ export default function Home({ searchParams }) {
 
 
     searchParams
-
-
     console.log(searchParams)
 
 
-     const EmailTemplate = ({
-        name,
-        email
-      }) => (
-        <div>
-          <p>Hello Kavya,</p>
-          <p>
-              {name} has submitted the contact form on your website. Their
-              email is {email}!
-          </p>
-          <p>
-              Regards,
-              <br />
-              Coffee
-          </p>
-        </div>
-      )
+  
 
-      const ApiKey ='re_MKTvM2VJ_2WXmEBShB5jx76cN53rqVAd9'
-
-    const handleClick = () => {
-        const resend = new Resend(process.re_MKTvM2VJ_2WXmEBShB5jx76cN53rqVAd9);
-        console.log("Call send API here")
-          async (req, res) => {
-            try {
-              const { name, email } = JSON.parse(req.body);
-          
-              const data = await resend.sendEmail({
-                  from: `Mouhcine <mouhcine.ait.labyad@gmail.com>`,
-                  to: [`mouhcine.ait.labyad@gmail.com`],
-                  subject: "🎉New submission to your contact form!",
-                  html: "",
-                  react: EmailTemplate('zer','aze')
-              });
-          
-              res.status(200).json(data);
-            } catch (error) {
-              res.status(400).json(error);
-            }
-          };
-      }
 
     return (
 
@@ -276,7 +235,7 @@ export default function Home({ searchParams }) {
 
 
 
-                    <button onClick={handleClick()} className='bg-gold rounded-xl p-3 text-white1  w-full text-[16px] font-normal  leading-[10px] tracking-wide' >
+                    <button  className='bg-gold rounded-xl p-3 text-white1  w-full text-[16px] font-normal  leading-[10px] tracking-wide' >
 
                         Book by mail
 

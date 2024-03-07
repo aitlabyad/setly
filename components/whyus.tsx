@@ -66,7 +66,7 @@ export default function whyus() {
                         </div>
                         <div className='flex flex-col justify-start  gap-3 p-2 '>
                             <h3 className='text-black1 leading-3 font-medium text-[20px]'>Experience driver</h3>
-                            <p className='text-[#6D6D6D] font-normal text-[16px]'>Don't have driver? Don't worry, we have many<br /> experienced driver for you.</p>
+                            <p className='text-[#6D6D6D] font-normal text-[16px]'>Don&rsquo;t have driver? Don&rsquo;t worry, we have many<br /> experienced driver for you.</p>
                         </div>
 
                     </div>
