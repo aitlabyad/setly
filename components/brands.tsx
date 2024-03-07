@@ -6,11 +6,11 @@ import { useState } from 'react'
 import Image from 'next/image'
 import ItemsCarousel from 'react-items-carousel';
 import { useMediaQuery } from 'react-responsive'
-import MediaQuery from 'react-responsive'
 
 
 
-export default function brands() {
+
+export default function Brands() {
 
     const [activeItemIndex, setActiveItemIndex] = useState(3);
     const chevronWidth = 40;

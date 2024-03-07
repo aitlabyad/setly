@@ -12,7 +12,7 @@ const makeImgPath = "/makes/";
 
 
 
-export default function cars() {
+export default function Cars() {
 
 
     const [activeItemIndex, setActiveItemIndex] = useState(0);
