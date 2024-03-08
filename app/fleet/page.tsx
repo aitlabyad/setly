@@ -6,8 +6,8 @@ import Footer from "@/components/footer";
 import { Poppins } from 'next/font/google';
 import Car from '@/components/car';
 import { cars } from '../../constants/Acars'
-import { useRouter } from "next/navigation"
 
+import { useSearchParams } from 'next/navigation'
 
 const poppins = Poppins({
     subsets: ['latin'],
@@ -20,17 +20,37 @@ const makeImgPath = "/makes/";
 
 
 
+interface CarDetail { // Specify type for car property
+    image: string;
+    model: string;
+    name: string;
+    fuelType: string;
+    seats: number;
+    transmission: string;
+    type: string;
+    price: string;
+
+  }
 
 
 
-export default function Home({searchParams}) {
+interface CarDetails {
+    car: CarDetail; // Specify type for car property
+    place: string;
+    date1: string;
+    date2: string;
+  }
 
-    searchParams,
-    console.log(searchParams)
+
+
+export default function Home() {
+  // @ts-expect-error
+ 
         
-
-  
-
+  const searchParams = useSearchParams<Record<string, string | string[]>>();
+  const search = searchParams.get('place')
+  const date = searchParams.get('date')
+  const date2 = searchParams.get('date2')
 
     return (
 
@@ -53,11 +73,11 @@ export default function Home({searchParams}) {
                 </div>
             </div>
 
-            {!searchParams.place ? <div className='sm:w-[1200px] w-11/12  flex text-light text-gold sm:justify-start   justify-center text-bold  items-center gap-2 pb-10 font-light text-[26px] '>
+            {!search ? <div className='sm:w-[1200px] w-11/12  flex text-light text-gold sm:justify-start   justify-center text-bold  items-center gap-2 pb-10 font-light text-[26px] '>
                 Our Fleet
             </div> : 
                     <div className='sm:w-[1200px] w-11/12  flex text-light text-gold sm:justify-start   justify-center text-bold  items-center gap-2 pb-10 font-light text-[20px] '>
-                    Availble cars from <span className='text-black1'>{searchParams.date} </span> to <span className='text-black1'>{searchParams.date2}</span> : 
+                    Availble cars from <span className='text-black1'>{date} </span> to <span className='text-black1'>{date2}</span> : 
                 </div>
             }
 
@@ -68,7 +88,7 @@ export default function Home({searchParams}) {
 
                 {cars.map(function (car) {
                     return (
-                        <Car key={car.model}car={car} place={searchParams.place} date1={searchParams.date} date2={searchParams.date2} />
+                        <Car key={car.model} car={car} place={search || ''} date1={date || ''} date2={date2|| ''} />
                     )
                 })}
 

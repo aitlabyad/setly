@@ -2,14 +2,36 @@
 import { useState } from 'react'
 import React from "react";
 import Car from "@/components/car"
-import ItemsCarousel from 'react-items-carousel';
+
+import ItemsCarousel from b
 import { useMediaQuery } from 'react-responsive'
 import MediaQuery from 'react-responsive'
 const carImgPath = "/cars/";
 const makeImgPath = "/makes/";
 
+interface CarDetail { // Specify type for car property
+  image: string;
+  model: string;
+  name: string;
+  fuelType: string;
+  seats: number;
+  transmission: string;
+  type: string;
+  price: string;
+  place?: string;
+  date1?: string;
+  date2?: string;
+
+}
 
 
+
+interface CarDetails {
+  car: CarDetail; // Specify type for car property
+  place: string;
+  date1: string;
+  date2: string;
+}
 
 
 export default function Cars() {
@@ -24,7 +46,7 @@ export default function Cars() {
         nOc = 4;
     }
 
-    cars =  [
+    const cars =  [
         {
             name: "Audi",
             model: "Q3",
@@ -158,7 +180,12 @@ export default function Cars() {
 
                     {cars.slice(0, 10).map(function (car) {
                         return (
-                            <Car key={car.model} car={car} />
+                          <Car key={car.model} car={{ 
+                            ...car, 
+                            place: car.place, 
+                            date1: car.date1, 
+                            date2: car.date2 
+                        }}/>
                         )
                     })}
 

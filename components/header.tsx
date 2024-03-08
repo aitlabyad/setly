@@ -44,17 +44,17 @@ export default function Header() {
       <div >
         <Menu placement="bottom-end">
           <MenuHandler>
-            <Button className='bg-transparent'><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 15 15" fill="none">
+            <Button className='bg-transparent' placeholder={undefined}><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 15 15" fill="none">
               <path d="M1.85229 4.32197H12.9659" stroke="#596780" strokeWidth="0.926137" strokeLinecap="round" />
               <path d="M1.85229 7.4091H12.9659" stroke="#596780" strokeWidth="0.926137" strokeLinecap="round" />
               <path d="M1.85229 10.4962H12.9659" stroke="#596780" strokeWidth="0.926137" strokeLinecap="round" />
             </svg></Button>
           </MenuHandler>
-          <MenuList>
-          <MenuItem className='p-0 m-0 w-full text-[16px] text-center text-gray1  font-light  leading-6 hover:text-gold'><a href="/">Home</a> </MenuItem>
-            <MenuItem className='p-0 m-0 w-full text-[16px] text-center text-gray1  font-light  leading-6 hover:text-gold'><a href="/">About</a> </MenuItem>
-            <MenuItem className='p-0 m-0 w-full text-[16px] text-center text-gray1  font-light  leading-6 hover:text-gold'>Contact</MenuItem>
-            <MenuItem className='p-0 m-0 w-full text-[16px] text-center text-gray1  font-light  leading-6 hover:text-gold'><a href="/fleet"></a>Fleet</MenuItem>
+          <MenuList  placeholder={undefined}>
+          <MenuItem className='p-0 m-0 w-full text-[16px] text-center text-gray1  font-light  leading-6 hover:text-gold' placeholder={undefined}><a href="/">Home</a> </MenuItem>
+            <MenuItem className='p-0 m-0 w-full text-[16px] text-center text-gray1  font-light  leading-6 hover:text-gold' placeholder={undefined}><a href="/">About</a> </MenuItem>
+            <MenuItem className='p-0 m-0 w-full text-[16px] text-center text-gray1  font-light  leading-6 hover:text-gold'  placeholder={undefined}>Contact</MenuItem>
+            <MenuItem className='p-0 m-0 w-full text-[16px] text-center text-gray1  font-light  leading-6 hover:text-gold' placeholder={undefined}><a href="/fleet"></a>Fleet</MenuItem>
           </MenuList>
         </Menu>
         

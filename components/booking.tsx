@@ -130,8 +130,6 @@ const places = [
 
 
 
-
-
 export default function Reservation() {
 
   const [date, setDate] = useState<Date>(new Date());
@@ -139,6 +137,18 @@ export default function Reservation() {
   const [place, setPlace] = useState("Morocco");
   
 
+    const handleDateChange = (date: Date | undefined) => {
+      if (date !== undefined) {
+        setDate(date);
+      }
+    };
+    const handleDateChange2 = (date2: Date | undefined) => {
+      if (date2 !== undefined) {
+        setDate2(date2);
+      }
+    };
+  
+  
   return (
     <div className='flex flex-col  justify-start items-center  gap-2  '>
 
@@ -205,7 +215,8 @@ export default function Reservation() {
                   <PopoverHandler>
                     <Input
                       className='w-full rounded-xl border-0 py-2 pl-10 text-black1 ring-0 ring-inset bg-white1 ring-transparent placeholder:text-black1  placeholder:text-[12px] focus:ring-0 focus:ring-inset focus:ring-transparent sm:text-sm sm:leading-4'
-                      onChange={event => setDate(event.target.value)}
+                      onChange={() => null}
+                      name="date"
                       value={date ? format(date, "MM/dd/yyyy") : ""}
                       placeholder="Pick up date" crossOrigin={undefined}                    />
                   </PopoverHandler>
@@ -215,7 +226,8 @@ export default function Reservation() {
 
                       mode="single"
                       selected={date}
-                      onSelect={setDate}
+                      
+                      onSelect={handleDateChange}
                       showOutsideDays
                       className="border-0"
                       classNames={{
@@ -270,6 +282,7 @@ export default function Reservation() {
                     <Input
                       className='w-full rounded-xl border-0 py-2 pl-10 text-black1 ring-0 ring-inset bg-white1 ring-transparent placeholder:text-black1  placeholder:text-[12px] focus:ring-0 focus:ring-inset focus:ring-transparent sm:text-sm sm:leading-4'
                       onChange={() => null}
+                      name="date2"
                       value={date2 ? format(date2, "MM/dd/yyyy") : ""}
                       placeholder="return date" crossOrigin={undefined}                    />
                   </PopoverHandler>
@@ -277,7 +290,8 @@ export default function Reservation() {
                     <DayPicker
                       mode="single"
                       selected={date2}
-                      onSelect={setDate2}
+                      onSelect={handleDateChange2}
+
                       showOutsideDays
                       className="border-0"
                       classNames={{

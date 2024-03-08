@@ -1,14 +1,13 @@
 'use client'
 
-import * as React from 'react';
+import React from 'react';
 import Header from "@/components/header"
 import Whyus from "@/components/whyus";
 import Footer from "@/components/footer";
 import { Poppins } from 'next/font/google';
 import { useState } from 'react';
-import { Input} from "@material-tailwind/react";
-import { Resend } from 'resend';
-
+import { Input } from "@material-tailwind/react";
+import { useSearchParams } from 'next/navigation'
 
 
 
@@ -21,21 +20,47 @@ const poppins = Poppins({
 const carImgPath = "/cars/";
 
 
-
-
-
-export default function Home({ searchParams }) {
-
-    const { countries } = useCountries();
-    const [country, setCountry] = useState(0);
-    const { name, flags, countryCallingCode } = countries[country];
-
-
-    searchParams
-    console.log(searchParams)
-
-
+let searchParam ={
+    name: "Audi",
+    model: "A6",
+    type: "SEDAN",
+    year: 2023,
+    doors: 5,
+    seats: 5,
+    transmission: "Automatic",
+    fuelType: "Diesel",
+    fuelConsumption: "8 L/100 km",
+    price: "4.0",
+    isActive: true,
+    showInMain: false,
+    image: carImgPath + "audi-a6-2023.webp",
+  }
   
+
+
+export default function Home() 
+{
+
+
+    const searchParams = useSearchParams();
+    const name = searchParams.get('name')
+    const model = searchParams.get('model')
+    const type = searchParams.get('type')
+    const year = searchParams.get('year')
+    const doors = searchParams.get('doors')
+    const seats = searchParams.get('seats')
+    const transmission = searchParams.get('transmission')
+    const fuelType = searchParams.get('fuelType')
+    const fuelConsumption = searchParams.get('fuelConsumption')
+    const price = searchParams.get('price')
+    const isActive = searchParams.get('isActive')
+    const showInMain = searchParams.get('showInMain')
+    const image = searchParams.get('image')
+    const date = searchParams.get('date')
+    const date2 = searchParams.get('date2')
+
+
+
 
 
     return (
@@ -43,6 +68,8 @@ export default function Home({ searchParams }) {
         <main className="flex  flex-col items-center justify-center ">
 
             <Header />
+
+
 
 
 
@@ -60,7 +87,7 @@ export default function Home({ searchParams }) {
             </div>
 
             <div className='sm:w-[1200px] w-11/12  flex text-light text-gold sm:justify-start   justify-center text-bold  items-center gap-2 pb-10 font-light text-[26px] '>
-                Reservation
+                Reservation{date}
             </div>
 
             <div className='flex sm:flex-row flex-col gap-10'>
@@ -97,19 +124,19 @@ export default function Home({ searchParams }) {
                                     </svg>
                                 </div>
                                 <h3 className="flex items-center">
-                                    <span className="text-gold text-sm">{searchParams.price}</span>
+                                    <span className="text-gold text-sm">{searchParam.price}</span>
                                     <span className="text-gray2 text-sm">/5.0</span>
                                 </h3>
                             </div>
                             <div className="flex justify-center items-center text-gold text-bold bg-lightGold rounded-md px-2 p-1  text-[8px]">Available now</div>
                         </div>
                         <div className="pt-2 items-center">
-                            <img src={searchParams.image} alt={searchParams.model} />
+                            <img src={searchParam.image} alt={searchParam.model} />
                         </div>
 
                         <div className="flex flex-col text-black1  text-[14px] tracking-tight  text-bold leading-[1rem]">
-                            <h3 className="">{searchParams.name}</h3>
-                            <h3 className="text-black1 text-[12px] font-extralight">{searchParams.model}</h3>
+                            <h3 className="">{searchParam.name}</h3>
+                            <h3 className="text-black1 text-[12px] font-extralight">{searchParam.model}</h3>
 
                         </div>
 
@@ -128,7 +155,7 @@ export default function Home({ searchParams }) {
 
                                 </svg></div>
 
-                                <p className=" text-gray2  text-[12px] font-light tracking-wide ">{searchParams.fuelType}</p>
+                                <p className=" text-gray2  text-[12px] font-light tracking-wide ">{searchParam.fuelType}</p>
                             </div>
                             <div className=" flex flex-row items-center justify-between">
                                 <div className="items-center p-1"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 9 9" fill="none">
@@ -140,7 +167,7 @@ export default function Home({ searchParams }) {
 
                                 </svg></div>
 
-                                <p className=" text-gray2  text-[12px] font-light tracking-wide ">{searchParams.seats}</p>
+                                <p className=" text-gray2  text-[12px] font-light tracking-wide ">{searchParam.seats}</p>
                             </div>
                             <div className=" flex flex-row items-center justify-between">
                                 <div className="items-center p-1">
@@ -150,7 +177,7 @@ export default function Home({ searchParams }) {
                                     </svg>
                                 </div>
 
-                                <p className=" text-gray2  text-[12px] font-light tracking-wide ">{searchParams.transmission}</p>
+                                <p className=" text-gray2  text-[12px] font-light tracking-wide ">{searchParam.transmission}</p>
                             </div>
                             <div className="  flex flex-row items-center justify-between">
                                 <div className="items-center p-1"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 9 9" fill="none">
@@ -160,7 +187,7 @@ export default function Home({ searchParams }) {
 
                                 </svg></div>
 
-                                <p className=" text-gray2  text-[12px] font-light tracking-wide ">{searchParams.type}</p>
+                                <p className=" text-gray2  text-[12px] font-light tracking-wide ">{searchParam.type}</p>
                             </div>
 
 
@@ -189,9 +216,8 @@ export default function Home({ searchParams }) {
                         </div>
 
                         <Input className="w-full rounded-xl border-0 py-2 pl-10 text-black1 text-sm ring-0 ring-inset bg-white1 ring-transparent placeholder:text-black1  placeholder:text-[12px] focus:ring-0 focus:ring-inset focus:ring-transparent  sm:leading-4"
-                            size="lg"
-                            placeholder="Full Name"
-
+                        size="lg"
+                        placeholder="Full Name" crossOrigin={undefined}
 
                         />
 
@@ -205,10 +231,9 @@ export default function Home({ searchParams }) {
                         </div>
 
                         <Input className="w-full rounded-xl border-0 py-2 pl-10 text-black1 text-sm ring-0 ring-inset bg-white1 ring-transparent placeholder:text-black1  placeholder:text-[12px] focus:ring-0 focus:ring-inset focus:ring-transparent  sm:leading-4"
-                            size="lg"
-                            placeholder="Phone Number"
-                            type="tel"
-
+                        size="lg"
+                        placeholder="Phone Number"
+                        type="tel" crossOrigin={undefined}
 
                         />
 
@@ -223,9 +248,8 @@ export default function Home({ searchParams }) {
                         </div>
 
                         <Input className="w-full rounded-xl border-0 py-2 pl-10 text-black1 text-sm ring-0 ring-inset bg-white1 ring-transparent placeholder:text-black1  placeholder:text-[12px] focus:ring-0 focus:ring-inset focus:ring-transparent  sm:leading-4"
-                            size="lg"
-                            placeholder="Email"
-
+                        size="lg"
+                        placeholder="Email" crossOrigin={undefined}
 
                         />
 
@@ -235,19 +259,17 @@ export default function Home({ searchParams }) {
 
 
 
-                    <button  className='bg-gold rounded-xl p-3 text-white1  w-full text-[16px] font-normal  leading-[10px] tracking-wide' >
-
+                    <button className='bg-gold rounded-xl p-3 text-white1  w-full text-[16px] font-normal  leading-[10px] tracking-wide' >
                         Book by mail
-
-
-
                     </button>
-                   
 
-                        <button className='cursor-pointer bg-gold rounded-xl p-3 text-white1  w-full text-[16px] font-normal  leading-[10px] tracking-wide' ><a href="https://api.whatsapp.com/send?phone=212661343109">Send a whatsApp</a>
 
-                        </button>
-                  
+                    <button className='cursor-pointer bg-gold rounded-xl p-3 text-white1  w-full text-[16px] font-normal  leading-[10px] tracking-wide' >
+                        <a href="https://api.whatsapp.com/send?phone=212661343109">
+                            Send a whatsApp
+                        </a>
+                    </button>
+
                 </form>
 
             </div>

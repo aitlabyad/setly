@@ -4,8 +4,10 @@ import React from 'react'
 
 import { useState } from 'react'
 import Image from 'next/image'
+// @ts-ignore
 import ItemsCarousel from 'react-items-carousel';
 import { useMediaQuery } from 'react-responsive'
+
 
 
 
