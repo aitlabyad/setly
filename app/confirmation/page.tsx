@@ -8,6 +8,7 @@ import { Poppins } from 'next/font/google';
 import { useState } from 'react';
 import { Input } from "@material-tailwind/react";
 import { useSearchParams } from 'next/navigation'
+import Image from 'next/image'
 
 
 
@@ -20,7 +21,7 @@ const poppins = Poppins({
 const carImgPath = "/cars/";
 
 
-let searchParam ={
+let searchParam = {
     name: "Audi",
     model: "A6",
     type: "SEDAN",
@@ -34,12 +35,11 @@ let searchParam ={
     isActive: true,
     showInMain: false,
     image: carImgPath + "audi-a6-2023.webp",
-  }
-  
+}
 
 
-export default function Home() 
-{
+
+export default function Home() {
 
 
     const searchParams = useSearchParams();
@@ -131,7 +131,13 @@ export default function Home()
                             <div className="flex justify-center items-center text-gold text-bold bg-lightGold rounded-md px-2 p-1  text-[8px]">Available now</div>
                         </div>
                         <div className="pt-2 items-center">
-                            <img src={searchParam.image} alt={searchParam.model} />
+                           
+                            <Image
+                                src={searchParam.image}
+                                width={264}
+                                height={148}
+                                alt="Picture of the author"
+                            />
                         </div>
 
                         <div className="flex flex-col text-black1  text-[14px] tracking-tight  text-bold leading-[1rem]">
@@ -216,8 +222,8 @@ export default function Home()
                         </div>
 
                         <Input className="w-full rounded-xl border-0 py-2 pl-10 text-black1 text-sm ring-0 ring-inset bg-white1 ring-transparent placeholder:text-black1  placeholder:text-[12px] focus:ring-0 focus:ring-inset focus:ring-transparent  sm:leading-4"
-                        size="lg"
-                        placeholder="Full Name" crossOrigin={undefined}
+                            size="lg"
+                            placeholder="Full Name" crossOrigin={undefined}
 
                         />
 
@@ -231,9 +237,9 @@ export default function Home()
                         </div>
 
                         <Input className="w-full rounded-xl border-0 py-2 pl-10 text-black1 text-sm ring-0 ring-inset bg-white1 ring-transparent placeholder:text-black1  placeholder:text-[12px] focus:ring-0 focus:ring-inset focus:ring-transparent  sm:leading-4"
-                        size="lg"
-                        placeholder="Phone Number"
-                        type="tel" crossOrigin={undefined}
+                            size="lg"
+                            placeholder="Phone Number"
+                            type="tel" crossOrigin={undefined}
 
                         />
 
@@ -248,8 +254,8 @@ export default function Home()
                         </div>
 
                         <Input className="w-full rounded-xl border-0 py-2 pl-10 text-black1 text-sm ring-0 ring-inset bg-white1 ring-transparent placeholder:text-black1  placeholder:text-[12px] focus:ring-0 focus:ring-inset focus:ring-transparent  sm:leading-4"
-                        size="lg"
-                        placeholder="Email" crossOrigin={undefined}
+                            size="lg"
+                            placeholder="Email" crossOrigin={undefined}
 
                         />
 

@@ -25,7 +25,13 @@ export default function hero() {
             <div className=" w-full text-[22px] text-center text-gray1  font-light  leading-6">Get a car wherever and whenever<br/> you need it from your phone.</div>
             </div>
 
-            <img className={`object-fill h-[264.016px;] sm:h-[260px]`} src="/hero-img-1.png" />
+            
+            <Image
+                                src="/hero-img-1.png" 
+                                width={500}
+                                height={264 }
+                                alt='hero car'
+                            />
 
             </div>
     </div>

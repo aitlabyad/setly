@@ -1,6 +1,6 @@
 import React from 'react'
 import Link from "next/link"
-
+import Image from 'next/image'
 const carImgPath = "/cars/";
 const makeImgPath = "/makes/";
 
@@ -76,7 +76,13 @@ export default function Car({ car, place, date1, date2 }: CarDetails) {
                     <div className="flex justify-center items-center text-gold text-bold bg-lightGold rounded-md px-2 p-1  text-[8px]">Available now</div>
                 </div>
                 <div className="pt-2 items-center">
-                    <img src={car.image} alt={car.model} />
+                    
+                    <Image
+                                src={car.image}
+                                width={264}
+                                height={148}
+                                alt={car.model} 
+                            />
                 </div>
 
                 <div className="flex flex-col text-black1  text-[14px] tracking-tight  text-bold leading-[1rem]">
