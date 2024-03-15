@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react';
+import React, { FormEventHandler } from 'react';
 import Header from "@/components/header"
 import Whyus from "@/components/whyus";
 import Footer from "@/components/footer";
@@ -10,7 +10,7 @@ import { Input } from "@material-tailwind/react";
 import { useSearchParams } from 'next/navigation'
 import Image from 'next/image'
 import { Suspense } from 'react';
-
+import Link from "next/link"
 
 const poppins = Poppins({
     subsets: ['latin'],
@@ -39,8 +39,22 @@ let searchParam = {
 
 
 
+
 export default function Home() {
 
+    const [pname, setPname] = useState('');
+    const [email, setEmail] = useState('');
+    const [phone, setPhone] = useState('');
+
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setPname(event.target.value);
+    };
+    const handleChange2 = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setPhone(event.target.value);
+    };
+    const handleChange3 = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setEmail(event.target.value);
+    };
 
     const searchParams = useSearchParams();
     const name = searchParams.get('name')
@@ -55,9 +69,56 @@ export default function Home() {
     const price = searchParams.get('price')
     const isActive = searchParams.get('isActive')
     const showInMain = searchParams.get('showInMain')
-    const image = searchParams.get('image')
+    const image = searchParams.get('image') || searchParam.image
     const date = searchParams.get('date')
     const date2 = searchParams.get('date2')
+    const place = searchParams.get('place')
+
+    const handleSubmit: FormEventHandler<HTMLButtonElement> = (event) => {
+
+        const BookingMessage =
+            "You have received a new booking request from a customer";
+
+        const subject = `New Booking Request - ${name}`;
+        const body = `
+          ${BookingMessage}
+
+          Booking Details:
+
+          ${("name")}: ${pname}
+          ${("phone")}: ${phone} 
+          ${("email")}: ${email}
+          -----------------------
+          ${("car")}: ${name}
+          ${("model")}: ${model}
+          ${("pick-up place")}: ${place}
+          ${("pick-up date")}: ${date}
+          ${("drop-off date")}: ${date2}
+        `;
+        const encodedBody = encodeURIComponent(body);
+        const mailToUrl = `mailto:contact@setlyluxurycar.com?subject=${encodeURIComponent(subject)}&body=${encodedBody}`;
+        window.open(mailToUrl, "_blank");
+
+    }
+
+    const handleSubmit2: FormEventHandler<HTMLButtonElement> = (event) => {
+        const BookingMessage =
+            "You have received a new booking request from a customer";
+        const messageBody =
+            `${BookingMessage}\n` +
+            `*${("name")}*: ${pname}\n` +
+            `*${("phone")}*: ${phone}n` +
+            `*${("email")}*: ${email}\n` +
+            `------\n` +
+            `*${("car")}: ${name}"*"${model}*\n` +
+            `*${("pick-up place")}*: ${place}\n` +
+            `*${("pick-up date")}*: ${date}\n` +
+            `*${("drop-off date")}*: ${date2}`;
+        const encodedMessage = encodeURIComponent(messageBody);
+        const whatsappUrl = `https://api.whatsapp.com/send?phone=212661807470&text=${encodedMessage}`;
+        window.open(whatsappUrl, "_blank");
+
+    }
 
 
 
@@ -87,10 +148,12 @@ export default function Home() {
                 </div>
 
                 <div className='sm:w-[1200px] w-11/12  flex text-light text-gold sm:justify-start   justify-center text-bold  items-center gap-2 pb-10 font-light text-[26px] '>
-                    Reservation{date}
+                    Reservation 
                 </div>
 
                 <div className='flex sm:flex-row flex-col gap-10'>
+
+
 
                     <div className='flex justify-center items-center'>
                         <div className="w-[280px] bg-white p-2 rounded-xl ">
@@ -124,16 +187,15 @@ export default function Home() {
                                         </svg>
                                     </div>
                                     <h3 className="flex items-center">
-                                        <span className="text-gold text-sm">{searchParam.price}</span>
+                                        <span className="text-gold text-sm">{price}</span>
                                         <span className="text-gray2 text-sm">/5.0</span>
                                     </h3>
                                 </div>
                                 <div className="flex justify-center items-center text-gold text-bold bg-lightGold rounded-md px-2 p-1  text-[8px]">Available now</div>
                             </div>
                             <div className="pt-2 items-center">
-
                                 <Image
-                                    src={searchParam.image}
+                                    src={image}
                                     width={264}
                                     height={148}
                                     alt="Picture of the author"
@@ -141,8 +203,8 @@ export default function Home() {
                             </div>
 
                             <div className="flex flex-col text-black1  text-[14px] tracking-tight  text-bold leading-[1rem]">
-                                <h3 className="">{searchParam.name}</h3>
-                                <h3 className="text-black1 text-[12px] font-extralight">{searchParam.model}</h3>
+                                <h3 className="">{name}</h3>
+                                <h3 className="text-black1 text-[12px] font-extralight">{model}</h3>
 
                             </div>
 
@@ -161,7 +223,7 @@ export default function Home() {
 
                                     </svg></div>
 
-                                    <p className=" text-gray2  text-[12px] font-light tracking-wide ">{searchParam.fuelType}</p>
+                                    <p className=" text-gray2  text-[12px] font-light tracking-wide ">{fuelType}</p>
                                 </div>
                                 <div className=" flex flex-row items-center justify-between">
                                     <div className="items-center p-1"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 9 9" fill="none">
@@ -173,7 +235,7 @@ export default function Home() {
 
                                     </svg></div>
 
-                                    <p className=" text-gray2  text-[12px] font-light tracking-wide ">{searchParam.seats}</p>
+                                    <p className=" text-gray2  text-[12px] font-light tracking-wide ">{seats}</p>
                                 </div>
                                 <div className=" flex flex-row items-center justify-between">
                                     <div className="items-center p-1">
@@ -183,7 +245,7 @@ export default function Home() {
                                         </svg>
                                     </div>
 
-                                    <p className=" text-gray2  text-[12px] font-light tracking-wide ">{searchParam.transmission}</p>
+                                    <p className=" text-gray2  text-[12px] font-light tracking-wide ">{transmission}</p>
                                 </div>
                                 <div className="  flex flex-row items-center justify-between">
                                     <div className="items-center p-1"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 9 9" fill="none">
@@ -193,7 +255,7 @@ export default function Home() {
 
                                     </svg></div>
 
-                                    <p className=" text-gray2  text-[12px] font-light tracking-wide ">{searchParam.type}</p>
+                                    <p className=" text-gray2  text-[12px] font-light tracking-wide ">{type}</p>
                                 </div>
 
 
@@ -224,6 +286,8 @@ export default function Home() {
                             <Input className="w-full rounded-xl border-0 py-2 pl-10 text-black1 text-sm ring-0 ring-inset bg-white1 ring-transparent placeholder:text-black1  placeholder:text-[12px] focus:ring-0 focus:ring-inset focus:ring-transparent  sm:leading-4"
                                 size="lg"
                                 placeholder="Full Name" crossOrigin={undefined}
+                                name="pname"
+                                onChange={handleChange}
 
                             />
 
@@ -240,6 +304,8 @@ export default function Home() {
                                 size="lg"
                                 placeholder="Phone Number"
                                 type="tel" crossOrigin={undefined}
+                                name='phoneNumber'
+                                onChange={handleChange2}
 
                             />
 
@@ -256,6 +322,8 @@ export default function Home() {
                             <Input className="w-full rounded-xl border-0 py-2 pl-10 text-black1 text-sm ring-0 ring-inset bg-white1 ring-transparent placeholder:text-black1  placeholder:text-[12px] focus:ring-0 focus:ring-inset focus:ring-transparent  sm:leading-4"
                                 size="lg"
                                 placeholder="Email" crossOrigin={undefined}
+                                name='email'
+                                onChange={handleChange3}
 
                             />
 
@@ -265,18 +333,45 @@ export default function Home() {
 
 
 
-                        <button className='bg-gold rounded-xl p-3 text-white1  w-full text-[16px] font-normal  leading-[10px] tracking-wide' >
+                        <button className='bg-gold rounded-xl p-3 text-white1  w-full text-[16px] font-normal  leading-[10px] tracking-wide' onClick={handleSubmit} >
                             Book by mail
                         </button>
 
 
-                        <button className='cursor-pointer bg-gold rounded-xl p-3 text-white1  w-full text-[16px] font-normal  leading-[10px] tracking-wide' >
-                            <a href="https://api.whatsapp.com/send?phone=212661343109">
-                                Send a whatsApp
-                            </a>
+
+                        <button className='cursor-pointer bg-gold rounded-xl p-3 text-white1  w-full text-[16px] font-normal  leading-[10px] tracking-wide ' onClick={handleSubmit2}  >
+                            Send a whatsApp
+
+
+
                         </button>
 
                     </form>
+
+                </div>
+
+
+
+                <div className='sm:w-[1200px] w-11/12  flex text-light text-gold sm:justify-start   justify-center text-bold  items-center gap-2 pb-10 font-light text-[26px] pt-10 '>
+                    Accepted Cards
+                </div>
+                <div className='flex sm:flex-row flex-col gap-10'>
+                    <div>
+                        <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M14.5531 70.7817V66.6617C14.5773 66.3152 14.5273 65.9675 14.4065 65.6419C14.2856 65.3162 14.0968 65.02 13.8525 64.7731C13.6081 64.5262 13.314 64.3342 12.9896 64.2099C12.6652 64.0857 12.3181 64.032 11.9714 64.0525C11.5176 64.023 11.0641 64.1157 10.6583 64.321C10.2525 64.5263 9.90925 64.8367 9.66425 65.2198C9.44095 64.8481 9.12157 64.5435 8.73971 64.3381C8.35785 64.1327 7.92766 64.034 7.49445 64.0525C7.11682 64.0336 6.74078 64.1135 6.40356 64.2846C6.06635 64.4556 5.77964 64.7117 5.57184 65.0276V64.2174H4.14355V70.7817H5.5855V67.1424C5.55432 66.9178 5.57327 66.6891 5.64098 66.4728C5.70868 66.2564 5.82346 66.0577 5.97707 65.891C6.13069 65.7242 6.31932 65.5936 6.52943 65.5084C6.73954 65.4232 6.96592 65.3856 7.19228 65.3983C8.13984 65.3983 8.62056 66.0163 8.62056 67.1287V70.7817H10.0625V67.1424C10.0337 66.9182 10.0543 66.6905 10.1228 66.4752C10.1914 66.2598 10.3063 66.0621 10.4594 65.8959C10.6125 65.7297 10.8002 65.599 11.0092 65.513C11.2182 65.4271 11.4435 65.3879 11.6693 65.3983C12.6442 65.3983 13.1112 66.0163 13.1112 67.1287V70.7817H14.5531ZM35.8941 64.2174H33.5595V62.2261H32.1176V64.2174H30.7854V65.522H32.1176V68.5157C32.1176 70.04 32.7081 70.9465 34.3972 70.9465C35.0282 70.9484 35.647 70.7723 36.1824 70.4383L35.7705 69.2161C35.3875 69.4446 34.9528 69.5722 34.5071 69.5869C33.7929 69.5869 33.5595 69.1473 33.5595 68.4883V65.522H35.8941V64.2174ZM48.0752 64.0525C47.7269 64.0423 47.3824 64.1261 47.0779 64.2953C46.7733 64.4645 46.5201 64.7128 46.3449 65.0138V64.2174H44.9303V70.7817H46.3585V67.1012C46.3585 66.0163 46.8254 65.4121 47.7594 65.4121C48.0648 65.4079 48.3681 65.4639 48.652 65.5769L49.0914 64.231C48.7652 64.1143 48.4216 64.0539 48.0752 64.0525V64.0525ZM29.6594 64.7391C28.8509 64.2585 27.9214 64.0201 26.9814 64.0525C25.3197 64.0525 24.2486 64.849 24.2486 66.1536C24.2486 67.2249 25.0451 67.8841 26.5144 68.09L27.1874 68.1861C27.9701 68.2958 28.341 68.5019 28.341 68.8727C28.341 69.3808 27.819 69.6693 26.8441 69.6693C26.0598 69.6919 25.2907 69.45 24.6605 68.9826L23.9877 70.095C24.8195 70.676 25.816 70.9745 26.8303 70.9465C28.7255 70.9465 29.824 70.0537 29.824 68.8041C29.824 67.6505 28.959 67.0462 27.5307 66.8402L26.8579 66.7441C26.2398 66.6617 25.7455 66.5383 25.7455 66.0988C25.7455 65.6181 26.2123 65.3297 26.9952 65.3297C27.714 65.3405 28.4182 65.5343 29.0414 65.8927L29.6594 64.7391ZM67.9192 64.0525C67.571 64.0423 67.2264 64.1261 66.9219 64.2953C66.6174 64.4645 66.3641 64.7128 66.1889 65.0138V64.2174H64.7744V70.7817H66.2025V67.1012C66.2025 66.0163 66.6695 65.4121 67.6033 65.4121C67.9088 65.4079 68.2122 65.4639 68.4961 65.5769L68.9355 64.231C68.6093 64.1143 68.2656 64.0539 67.9192 64.0525V64.0525ZM49.517 67.4993C49.4981 67.9618 49.5761 68.4231 49.7461 68.8536C49.9162 69.2841 50.1744 69.6742 50.5042 69.9989C50.8341 70.3236 51.2283 70.5756 51.6614 70.7388C52.0945 70.902 52.557 70.9728 53.0191 70.9465C53.8765 70.9896 54.7191 70.7103 55.381 70.1636L54.6944 69.01C54.2007 69.3864 53.5986 69.5935 52.9778 69.6006C52.4426 69.5681 51.94 69.3326 51.5725 68.9421C51.205 68.5516 51.0003 68.0357 51.0003 67.4995C51.0003 66.9633 51.205 66.4473 51.5725 66.0568C51.94 65.6663 52.4426 65.4308 52.9778 65.3983C53.5987 65.4054 54.2007 65.6125 54.6944 65.9889L55.381 64.8353C54.719 64.2887 53.8765 64.0095 53.0191 64.0525C52.557 64.0263 52.0946 64.097 51.6615 64.2602C51.2284 64.4233 50.8342 64.6754 50.5043 65C50.1745 65.3247 49.9162 65.7147 49.7462 66.1452C49.5762 66.5756 49.4981 67.0369 49.517 67.4993V67.4993ZM62.893 67.4993V64.2174H61.4647V65.0138C61.2209 64.6997 60.9055 64.4485 60.5447 64.2812C60.1839 64.114 59.7883 64.0356 59.391 64.0525C58.5061 64.0959 57.6717 64.478 57.0607 65.1197C56.4497 65.7614 56.1089 66.6135 56.1089 67.4995C56.1089 68.3856 56.4497 69.2377 57.0607 69.8793C57.6717 70.521 58.5061 70.9031 59.391 70.9465C59.7883 70.9635 60.1839 70.885 60.5447 70.7177C60.9055 70.5505 61.221 70.2992 61.4647 69.9851V70.7817H62.893V67.4993ZM57.5783 67.4993C57.6004 67.112 57.7355 66.7396 57.9668 66.4281C58.198 66.1165 58.5154 65.8795 58.8798 65.7462C59.2442 65.6129 59.6396 65.5892 60.0173 65.6779C60.395 65.7666 60.7385 65.964 61.0054 66.2456C61.2723 66.5272 61.4509 66.8808 61.5193 67.2627C61.5876 67.6446 61.5427 68.0382 61.3901 68.3949C61.2374 68.7516 60.9837 69.0558 60.6603 69.2701C60.3368 69.4843 59.9577 69.5992 59.5697 69.6006C59.2977 69.6042 59.0279 69.5516 58.7774 69.4458C58.5268 69.3401 58.3008 69.1835 58.1137 68.9861C57.9266 68.7887 57.7825 68.5547 57.6903 68.2988C57.5982 68.0429 57.56 67.7707 57.5783 67.4993V67.4993ZM40.3436 64.0525C39.4529 64.0994 38.615 64.4894 38.0057 65.1407C37.3964 65.792 37.063 66.654 37.0754 67.5458C37.0878 68.4376 37.4451 69.2899 38.0724 69.924C38.6997 70.558 39.5481 70.9245 40.4397 70.9465C41.4195 70.9809 42.3777 70.6533 43.1313 70.0263L42.4309 68.9689C41.8886 69.4035 41.217 69.6451 40.5221 69.6555C40.0501 69.6952 39.5813 69.5497 39.2147 69.2498C38.8482 68.9499 38.6128 68.5191 38.5583 68.0487H43.4335C43.4472 67.8703 43.4609 67.6917 43.4609 67.4993C43.4472 65.4533 42.1838 64.0525 40.3436 64.0525V64.0525ZM40.316 65.3297C40.7474 65.3213 41.1646 65.4842 41.4761 65.7828C41.7875 66.0814 41.9679 66.4913 41.9778 66.9227H38.572C38.5971 66.482 38.7936 66.0686 39.1195 65.7709C39.4454 65.4732 39.8749 65.3148 40.316 65.3297V65.3297ZM76.1452 67.4993V61.5807H74.7169V65.0138C74.4732 64.6997 74.1577 64.4485 73.7969 64.2812C73.4362 64.114 73.0406 64.0356 72.6433 64.0525C71.7583 64.0959 70.9239 64.478 70.3129 65.1197C69.7019 65.7614 69.3611 66.6135 69.3611 67.4995C69.3611 68.3856 69.7019 69.2377 70.3129 69.8794C70.9239 70.5211 71.7583 70.9031 72.6433 70.9465C73.0406 70.9634 73.4362 70.885 73.797 70.7177C74.1577 70.5505 74.4732 70.2992 74.7169 69.9851V70.7817H76.1452V67.4993ZM78.526 69.8303C78.6147 69.8298 78.7026 69.8472 78.7844 69.8816C78.863 69.9144 78.9346 69.9619 78.9955 70.0215C79.0558 70.081 79.1041 70.1515 79.1377 70.2294C79.172 70.3093 79.1897 70.3954 79.1897 70.4824C79.1897 70.5695 79.172 70.6556 79.1377 70.7355C79.1039 70.813 79.0556 70.8833 78.9955 70.9426C78.9345 71.0022 78.8629 71.0499 78.7844 71.0832C78.7027 71.1182 78.6148 71.1359 78.526 71.1353C78.3953 71.1366 78.2672 71.0994 78.1576 71.0283C78.0479 70.9572 77.9617 70.8554 77.9096 70.7355C77.8753 70.6556 77.8577 70.5694 77.8577 70.4824C77.8577 70.3954 77.8753 70.3093 77.9096 70.2294C77.9431 70.1516 77.9911 70.0811 78.0512 70.0215C78.112 69.9614 78.184 69.9139 78.2631 69.8816C78.3464 69.8471 78.4358 69.8297 78.526 69.8303V69.8303ZM78.526 70.9913C78.5937 70.9919 78.6607 70.9783 78.7228 70.9514C78.7825 70.9255 78.8367 70.8886 78.8826 70.8426C78.9775 70.7468 79.0307 70.6175 79.0307 70.4828C79.0307 70.348 78.9775 70.2187 78.8826 70.1229C78.8367 70.0771 78.7825 70.0405 78.7228 70.0151C78.6606 69.9886 78.5936 69.9753 78.526 69.9759C78.4572 69.9754 78.3889 69.9887 78.3253 70.0151C78.2647 70.0401 78.2096 70.0767 78.1631 70.1229C78.0682 70.2186 78.015 70.348 78.015 70.4828C78.015 70.6175 78.0682 70.7469 78.1631 70.8426C78.2097 70.889 78.2648 70.9259 78.3253 70.9514C78.3888 70.9782 78.4571 70.9918 78.526 70.9913V70.9913ZM78.5644 70.1773C78.6286 70.1731 78.6923 70.1915 78.7444 70.2294C78.7651 70.2465 78.7816 70.2681 78.7926 70.2927C78.8035 70.3172 78.8086 70.344 78.8075 70.3709C78.8082 70.3939 78.8041 70.4168 78.7954 70.4381C78.7868 70.4595 78.7737 70.4787 78.7572 70.4947C78.7174 70.53 78.667 70.5511 78.614 70.5547L78.8123 70.7834H78.6572L78.4733 70.5563H78.4141V70.7834H78.2846V70.1773H78.5644ZM78.4141 70.2909V70.4525H78.5629C78.5915 70.4539 78.6198 70.4469 78.6445 70.4323C78.6545 70.4257 78.6625 70.4165 78.6679 70.4057C78.6732 70.3949 78.6756 70.3829 78.6748 70.3709C78.6754 70.3591 78.673 70.3473 78.6676 70.3368C78.6623 70.3262 78.6543 70.3173 78.6445 70.3108C78.6198 70.2964 78.5914 70.2895 78.5629 70.2909H78.4141ZM70.8306 67.4993C70.8528 67.112 70.9879 66.7396 71.2191 66.4281C71.4504 66.1166 71.7678 65.8796 72.1322 65.7464C72.4965 65.6131 72.892 65.5894 73.2696 65.6781C73.6473 65.7669 73.9908 65.9642 74.2576 66.2458C74.5245 66.5274 74.7031 66.881 74.7715 67.2629C74.8398 67.6448 74.7948 68.0384 74.6422 68.3951C74.4895 68.7517 74.2358 69.0559 73.9124 69.2701C73.5889 69.4844 73.2098 69.5992 72.8218 69.6006C72.5499 69.6042 72.2801 69.5515 72.0296 69.4458C71.779 69.34 71.5531 69.1835 71.366 68.9861C71.1789 68.7887 71.0348 68.5547 70.9426 68.2988C70.8505 68.0429 70.8123 67.7707 70.8306 67.4993V67.4993ZM22.6006 67.4993V64.2174H21.1724V65.0138C20.9286 64.6997 20.6131 64.4485 20.2523 64.2812C19.8916 64.114 19.496 64.0356 19.0987 64.0525C18.2137 64.0959 17.3793 64.478 16.7683 65.1197C16.1574 65.7614 15.8166 66.6135 15.8166 67.4995C15.8166 68.3856 16.1574 69.2377 16.7683 69.8793C17.3793 70.521 18.2137 70.9031 19.0987 70.9465C19.496 70.9635 19.8916 70.885 20.2523 70.7177C20.6131 70.5505 20.9286 70.2992 21.1724 69.9851V70.7817H22.6006V67.4993ZM17.286 67.4993C17.3082 67.112 17.4433 66.7396 17.6746 66.4281C17.9059 66.1166 18.2232 65.8796 18.5876 65.7464C18.952 65.6131 19.3474 65.5894 19.7251 65.6781C20.1027 65.7669 20.4462 65.9642 20.7131 66.2458C20.9799 66.5274 21.1585 66.881 21.2269 67.2629C21.2952 67.6448 21.2503 68.0384 21.0976 68.3951C20.945 68.7517 20.6912 69.056 20.3678 69.2702C20.0443 69.4844 19.6652 69.5992 19.2772 69.6006C19.0053 69.6042 18.7355 69.5515 18.485 69.4458C18.2344 69.34 18.0085 69.1835 17.8214 68.9861C17.6343 68.7887 17.4902 68.5547 17.3981 68.2988C17.3059 68.0429 17.2678 67.7707 17.286 67.4993V67.4993Z" fill="#231F20" />
+                            <path d="M50.8169 14.1906H29.1846V53.0644H50.8169V14.1906Z" fill="#FF5F00" />
+                            <path d="M30.5579 33.6289C30.5545 29.885 31.4029 26.1895 33.0388 22.822C34.6748 19.4545 37.0554 16.5034 40.0005 14.192C36.3534 11.3253 31.9734 9.5425 27.361 9.04745C22.7486 8.55239 18.09 9.36503 13.9176 11.3925C9.74519 13.4199 6.22739 16.5803 3.76627 20.5125C1.30515 24.4447 0 28.99 0 33.6289C0 38.2678 1.30515 42.8131 3.76627 46.7453C6.22739 50.6774 9.74519 53.8379 13.9176 55.8653C18.09 57.8927 22.7486 58.7054 27.361 58.2103C31.9734 57.7153 36.3534 55.9325 40.0005 53.0658C37.0554 50.7544 34.6748 47.8032 33.0388 44.4357C31.4029 41.0682 30.5545 37.3727 30.5579 33.6289V33.6289Z" fill="#EB001B" />
+                            <path d="M80 33.6289C80.0002 38.2677 78.6952 42.813 76.2342 46.7452C73.7732 50.6774 70.2555 53.8378 66.0832 55.8652C61.9109 57.8927 57.2524 58.7053 52.64 58.2103C48.0277 57.7153 43.6477 55.9325 40.0007 53.0658C42.9432 50.752 45.322 47.8004 46.9577 44.4334C48.5934 41.0665 49.4432 37.3721 49.4432 33.6289C49.4432 29.8856 48.5934 26.1913 46.9577 22.8243C45.322 19.4574 42.9432 16.5057 40.0007 14.1919C43.6477 11.3252 48.0277 9.54249 52.64 9.04744C57.2524 8.5524 61.9109 9.36504 66.0832 11.3925C70.2555 13.4199 73.7732 16.5804 76.2342 20.5126C78.6952 24.4448 80.0002 28.99 80 33.6289V33.6289Z" fill="#F79E1B" />
+                            <path d="M77.6414 48.9476V48.1518H77.9623V47.9896H77.145V48.1518H77.4661V48.9476H77.6414ZM79.2281 48.9476V47.9881H78.9776L78.6894 48.6481L78.4012 47.9881H78.1506V48.9476H78.3275V48.2238L78.5977 48.8479H78.7811L79.0513 48.2222V48.9476H79.2281Z" fill="#F79E1B" />
+                        </svg>
+
+                    </div>
+                    <div>
+                        <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M39.6108 27.4876L34.2661 52.475H27.8014L33.1466 27.4876H39.6108ZM66.8075 43.6223L70.2098 34.239L72.1679 43.6223H66.8075ZM74.0225 52.475H80L74.7778 27.4876H69.264C68.0214 27.4876 66.9738 28.2081 66.5102 29.3192L56.8105 52.475H63.5995L64.9472 48.7433H73.2396L74.0225 52.475ZM57.1471 44.3175C57.1752 37.7229 48.0308 37.3576 48.0921 34.411C48.1117 33.5157 48.966 32.562 50.833 32.3181C51.7586 32.1989 54.3129 32.1022 57.2084 33.4364L58.3408 28.1356C56.7857 27.573 54.7844 27.0312 52.2942 27.0312C45.9036 27.0312 41.4081 30.4258 41.3721 35.2905C41.3311 38.8879 44.5834 40.8937 47.0287 42.0919C49.5499 43.3165 50.3946 44.1016 50.3822 45.1959C50.3648 46.8723 48.3719 47.6148 46.5162 47.6429C43.2644 47.6934 41.3794 46.7639 39.8772 46.0636L38.7037 51.5415C40.2167 52.2339 43.0042 52.8364 45.8907 52.8673C52.6848 52.8673 57.1269 49.5127 57.1471 44.3175ZM30.3737 27.4876L19.8995 52.475H13.0672L7.9125 32.5333C7.60002 31.307 7.32745 30.8563 6.3771 30.3381C4.82258 29.494 2.25646 28.7043 0 28.2132L0.152868 27.4876H11.1525C12.5536 27.4876 13.8141 28.42 14.135 30.0341L16.858 44.4945L23.5824 27.4876H30.3737Z" fill="#1434CB" />
+                        </svg>
+
+                    </div>
 
                 </div>
 

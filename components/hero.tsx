@@ -1,6 +1,7 @@
+'use client'
 import React from 'react'
 import Image from 'next/image'
-
+import {useEffect,useState} from 'react'
 import { Poppins } from 'next/font/google';
 
 const poppins = Poppins({
@@ -10,10 +11,23 @@ const poppins = Poppins({
   weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900']
 });
 
+const images = [ '/hero-img-2.png', '/hero-img-3.png','/hero-img-4.png','/hero-img-5.webp'];
 
 
+export default function Hero() {
 
-export default function hero() {
+
+  const [currentImage, setCurrentImage] = useState("/hero-img-1.png");
+
+    useEffect(() => {
+        const intervalId = setInterval(() => {
+            setCurrentImage(images[Math.floor(Math.random() * images.length)]);
+        }, 2000)
+        
+        return () => clearInterval(intervalId);
+    }, [])
+
+
   return (
     <>
     
@@ -27,9 +41,9 @@ export default function hero() {
 
             
             <Image
-                                src="/hero-img-1.png" 
-                                width={500}
-                                height={264 }
+                                src={currentImage} 
+                                width={750}
+                                height={300}
                                 alt='hero car'
                             />
 

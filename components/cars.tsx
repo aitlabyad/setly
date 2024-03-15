@@ -312,9 +312,9 @@ export default function Cars() {
                                 seats: car.seats,
                                 transmission: car.transmission,
                                 type: car.type,
-                                place: '',
-                                date: '',
-                                date2: '',
+                                place: 'AirPort Casa',
+                                date: 'Today',
+                                date2: 'not selected',
                             },
                         }}
                     >

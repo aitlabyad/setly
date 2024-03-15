@@ -124,17 +124,11 @@ const places = [
   },
 ];
 
-
-
-
-
-
-
 export default function Reservation() {
 
   const [date, setDate] = useState<Date>(new Date());
   const [date2, setDate2] = useState<Date>(new Date());
-  const [place, setPlace] = useState("Morocco");
+  const [place, setPlace] = useState("Air Port Casablanca");
   
 
     const handleDateChange = (date: Date | undefined) => {
@@ -147,6 +141,7 @@ export default function Reservation() {
         setDate2(date2);
       }
     };
+    
   
   
   return (
@@ -184,10 +179,10 @@ export default function Reservation() {
                 </defs>
               </svg>
             </div>
-            <select id="countries" onChange={(e) => setPlace(e.target.value)} defaultValue={''} className="w-full rounded-xl border-0 py-2 pl-10 text-black1 text-sm ring-0 ring-inset bg-white1 ring-transparent placeholder:text-black1  placeholder:text-[12px] focus:ring-0 focus:ring-inset focus:ring-transparent  sm:leading-4">
+            <select id="countries" onChange={(e) => setPlace(e.target.value)} defaultValue={'Casablanca - Mohammed V International Airport'} className="w-full rounded-xl border-0 py-2 pl-10 text-black1 text-sm ring-0 ring-inset bg-white1 ring-transparent placeholder:text-black1  placeholder:text-[12px] focus:ring-0 focus:ring-inset focus:ring-transparent  sm:leading-4">
 
 
-              <option >Pick up location</option>
+              <option >Casablanca - Mohammed V International Airport</option>
 
               {
                 places.map(plase =>
@@ -218,7 +213,7 @@ export default function Reservation() {
                       onChange={() => null}
                       name="date"
                       value={date ? format(date, "MM/dd/yyyy") : ""}
-                      placeholder="Pick up date" crossOrigin={undefined}                    />
+                      placeholder="Pick up date" crossOrigin={undefined} />
                   </PopoverHandler>
                   <PopoverContent placeholder={undefined}
                   >
@@ -342,8 +337,8 @@ export default function Reservation() {
           </div>
 
 
-          <button className='bg-gold rounded-xl p-3 text-white1  w-full text-[16px] font-normal  leading-[10px] tracking-wide' >
-            <Link
+          
+            <Link className='flex bg-gold rounded-xl p-3 text-white1 justify-center  w-full text-[16px] font-normal  leading-[10px] tracking-wide'
               href={{
                 pathname: "/fleet",
                 query: { date:  moment(date).format("DD/MM/YYYY") , date2:  moment(date2).format("DD/MM/YYYY"), place: place,},
@@ -353,7 +348,7 @@ export default function Reservation() {
             </Link>
 
 
-          </button>
+          
         </form>
       </div>
 
