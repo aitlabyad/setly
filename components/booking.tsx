@@ -129,6 +129,7 @@ export default function Reservation() {
   const [date, setDate] = useState<Date>(new Date());
   const [date2, setDate2] = useState<Date>(new Date());
   const [place, setPlace] = useState("Air Port Casablanca");
+  const [place2, setPlace2] = useState("");
   
 
     const handleDateChange = (date: Date | undefined) => {
@@ -193,7 +194,17 @@ export default function Reservation() {
 
 
             </select>
+
+
+
+
+
+
+
+
+            
           </div>
+          
 
           <div className=' flex flex-row gap-2 rounded-xl  w-full'>
             <div className="relative  rounded-xl w-full">
@@ -209,13 +220,14 @@ export default function Reservation() {
                   </div>
                   <PopoverHandler>
                     <Input
+                      
                       className='w-full rounded-xl border-0 py-2 pl-10 text-black1 ring-0 ring-inset bg-white1 ring-transparent placeholder:text-black1  placeholder:text-[12px] focus:ring-0 focus:ring-inset focus:ring-transparent sm:text-sm sm:leading-4'
                       onChange={() => null}
                       name="date"
-                      value={date ? format(date, "MM/dd/yyyy") : ""}
+                      value={date ? format(date, "MM/dd/yyyy") : "pick up date"}
                       placeholder="Pick up date" crossOrigin={undefined} />
                   </PopoverHandler>
-                  <PopoverContent placeholder={undefined}
+                  <PopoverContent placeholder='Pick up date'
                   >
                     <DayPicker
 

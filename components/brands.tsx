@@ -92,8 +92,8 @@ export default function Brands() {
                 <div className='flex items-center justify-center bg-white  w-[110px] h-[110px] p-2 rounded-xl'>
                     <Image className=''
                         src="/brands/Peugeot.png"
-                        width={100}
-                        height={100}
+                        width={60}
+                        height={60}
                         alt="Picture of the author"
                     />
 
@@ -101,8 +101,8 @@ export default function Brands() {
                 <div className='flex items-center justify-center bg-white  w-[110px] h-[110px] p-2 rounded-xl'>
                     <Image className=''
                         src="/brands/Citroen.png"
-                        width={100}
-                        height={100}
+                        width={60}
+                        height={60}
                         alt="Picture of the author"
                     />
 
@@ -119,8 +119,8 @@ export default function Brands() {
                 <div className='flex items-center justify-center bg-white  w-[110px] h-[110px] p-2 rounded-xl'>
                     <Image className=''
                         src="/brands/Renault.png"
-                        width={100}
-                        height={100}
+                        width={60}
+                        height={60}
                         alt="Picture of the author"
                     />
 
@@ -143,15 +143,7 @@ export default function Brands() {
                     />
 
                 </div>
-                <div className='flex items-center justify-center bg-white  w-[110px] h-[110px] p-2 rounded-xl'>
-                    <Image className=''
-                        src="/brands/Dacia.png"
-                        width={100}
-                        height={100}
-                        alt="Picture of the author"
-                    />
-
-                </div>
+            
             </ItemsCarousel>
             </div>
             

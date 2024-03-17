@@ -1,3 +1,4 @@
+
 import "./globals.css";
 import React from 'react';
 import Header from "@/components/header"
@@ -8,9 +9,12 @@ import Brands from "@/components/brands";
 import Whyus from "@/components/whyus";
 import Sectioncontact from "@/components/sectioncontact";
 import Footer from "@/components/footer";
+import WhatsApp from "@/components/whatsApp";
 
 
 export default function Home() {
+
+
   return (
     <main className="flex  flex-col items-center justify-center ">
 
@@ -22,7 +26,7 @@ export default function Home() {
       <Whyus />
       <Sectioncontact />
       <Footer />
-
+      <WhatsApp />
     </main>
   );
 }
