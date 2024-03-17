@@ -11,7 +11,7 @@ const poppins = Poppins({
   weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900']
 });
 
-const images = [ '/hero-img-2.png', '/hero-img-3.png','/hero-img-4.png','/hero-img-5.webp'];
+const images = [ '/hero-img-2.png', '/hero-img-3.png','/hero-img-5.webp'];
 
 
 export default function Hero() {
@@ -45,6 +45,7 @@ export default function Hero() {
                                 width={750}
                                 height={300}
                                 alt='hero car'
+                                quality={50}
                             />
 
             </div>

@@ -18,7 +18,7 @@ export default function sectionContact() {
         <div className='flex flex-col items-center justify-center w-[380px] sm:w-1/2 gap-4'>
           <h1 className='text-black1 text-[36px]  font-medium  leading-[46px] pt-6'>Book your next trip </h1>
           <h3 className='text-black1 text-[16px] font-normal  leading-[16px]'>Operators available 24/7</h3>
-          <div className='flex flex-row justify-center items-center gap-6 pt-12 w-full'>
+          <div className='flex flex-col sm:flex-row justify-center items-center gap-6 pt-12 w-full'>
             <div className='flex flex-row justify-center  items-center w-1/2'>
               <div className='flex flex-col justify-center items-center '>
                 <div className='flex items-center justify-center  w-16 h-16    bg-lightGold rounded-[20px]   '>

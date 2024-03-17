@@ -26,8 +26,8 @@ export default function Brands() {
 
 
 
-        <div className="w-[360px] sm:w-[1200px] justify-center items-center mt-10 mx-10  " style={{ padding: ` 2 ${chevronWidth}px` }}>
-            <div className='sm:w-[1200px] w-11/12  flex text-light text-black1 sm:justify-start mt-10  justify-center text-bold text-[22px] items-center gap-2 pb-6'>
+        <div className="w-[360px] sm:w-[1200px] justify-center items-center mt-10 mx-10  " style={{ padding: `  1.2${chevronWidth}px` }}>
+            <div className='sm:w-[1200px] w-[360px]  flex text-light text-black1 sm:justify-start mt-10  justify-center text-bold text-[22px] items-center gap-2 pb-6'>
                 Brands
             </div>
             <div className=" items-center justify-center ">

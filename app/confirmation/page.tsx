@@ -76,10 +76,9 @@ export default function Home() {
 
     const handleSubmit: FormEventHandler<HTMLButtonElement> = (event) => {
 
-        const BookingMessage =
-            "You have received a new booking request from a customer";
+        const BookingMessage = "You have received a new booking request from a customer";
 
-        const subject = `New Booking Request - ${name}`;
+        const subject = `New Booking Request`;
         const body = `
           ${BookingMessage}
 
@@ -96,7 +95,7 @@ export default function Home() {
           ${("drop-off date")}: ${date2}
         `;
         const encodedBody = encodeURIComponent(body);
-        const mailToUrl = `mailto:contact@setlyluxurycar.com?subject=${encodeURIComponent(subject)}&body=${encodedBody}`;
+        const mailToUrl = `mailto:Booking@setlyluxurycar.com?subject=${encodeURIComponent(subject)}&body=${encodedBody}`;
         window.open(mailToUrl, "_blank");
 
     }
@@ -341,9 +340,6 @@ export default function Home() {
 
                         <button className='cursor-pointer bg-gold rounded-xl p-3 text-white1  w-full text-[16px] font-normal  leading-[10px] tracking-wide ' onClick={handleSubmit2}  >
                             Send a whatsApp
-
-
-
                         </button>
 
                     </form>
