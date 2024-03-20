@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Suspense } from 'react';
 import { Poppins } from 'next/font/google';
+import { Analytics } from "@vercel/analytics/react"
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -31,6 +32,7 @@ export default function RootLayout({
         <Suspense>
           {children}
         </Suspense>
+        <Analytics/>
       </body>
     </html>
   );
