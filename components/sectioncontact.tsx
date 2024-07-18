@@ -29,7 +29,7 @@ export default function sectionContact() {
                 </div>
                 <div className='flex flex-col justify-center items-center pt-6'>
                   <h4 className='text-gray2 text-[12px] font-medium uppercase leading-[12px] '>PHONE NUMBER</h4>
-                  <p className='text-black1 text-[14px] font-normal uppercase leading-[18px] pt-2'><a href="tel:+212661807470">+212 661 80 74 70</a></p>
+                  <p className='text-black1 text-[14px] font-normal uppercase leading-[18px] pt-2'><a href="tel:+212661343109">+212 661343109</a></p>
                 </div>
 
               </div>

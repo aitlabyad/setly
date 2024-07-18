@@ -6,7 +6,7 @@ import { FloatingWhatsApp } from 'react-floating-whatsapp'
 export default function WhatsApp() {
     return (
         <FloatingWhatsApp 
-                phoneNumber="+212661807470"
+                phoneNumber="+212661343109"
                 accountName="Setly Luxury Cars" 
                 avatar='/LOGO.png' // Convert the logo variable to a string
             />

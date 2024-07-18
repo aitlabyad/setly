@@ -43,7 +43,7 @@ export default function footer() {
                 <div className='flex flex-col items-center sm:justify-center sm:items-start pt-2 p-10 pb-6 gap-6'>
                     <h3 className='text-black1 text-[20px] font-normal leading-[20px] '>CONTACT</h3>
                     <ul className='flex flex-col sm:items-start gap-2 pt-4 justify-center items-center'>
-                        <li><a href="tel:+212661807470">+212 661 80 74 70</a></li>
+                        <li><a href="tel:+212661343109">+212 661 34 31 09</a></li>
                         <li><a href="mailto: contact@slcrental.ma">contact@slcrental.ma</a></li>
                         <li><a href="mailto: contact@setlyluxurycar.com">contact@setlyluxurycar.com</a></li>
                         <li className='w-64 text-center sm:text-start'>Mohammed V International Airport, Nouaceur Casablanca. Morocco.</li>

@@ -114,7 +114,7 @@ export default function Home() {
             `*${("pick-up date")}*: ${date}\n` +
             `*${("drop-off date")}*: ${date2}`;
         const encodedMessage = encodeURIComponent(messageBody);
-        const whatsappUrl = `https://api.whatsapp.com/send?phone=212661807470&text=${encodedMessage}`;
+        const whatsappUrl = `https://api.whatsapp.com/send?phone=212661343109&text=${encodedMessage}`;
         window.open(whatsappUrl, "_blank");
 
     }
